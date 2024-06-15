@@ -121,9 +121,12 @@ Answer B: {B_answer}
 
 
 def judge(
-    prompt, A_answer, B_answer, ground_truth_answer=None, judge_llm=ChatUpstage()
+    prompt, A_answer, B_answer, ground_truth_answer=None, judge_llm=None, trials=3
 ):
-    for _ in range(5):
+    if judge_llm is None:
+        judge_llm = ChatUpstage()
+        
+    for _ in range(trials):
         A_score = get_judge_score(prompt, A_answer, ground_truth_answer, judge_llm)
         B_score = get_judge_score(prompt, B_answer, ground_truth_answer, judge_llm)
 
