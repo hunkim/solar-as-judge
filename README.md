@@ -23,7 +23,7 @@ B_score = saj.get_judge_score(prompt, B_answer, ground_truth)
 winner = saj.get_winner(prompt, A_answer, B_answer, ground_truth)
 print(A_score, B_score, winner)
 
-# Check the scores and the winner. If they are consistent, then determine the final score.
-
+# Check the scores and the winner. 
+# If they are consistent, then determine the final score.
 a_score, b_score = saj.judge(prompt, A_answer, B_answer, ground_truth)
 print(a_score, b_score)
