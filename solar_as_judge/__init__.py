@@ -12,8 +12,11 @@ class Score(BaseModel):
 
 
 def get_judge_score(
-    prompt, answer, ground_truth_answer, judge_llm=ChatUpstage(), trials=3
+    prompt, answer, ground_truth_answer, judge_llm=None, trials=3
 ):
+    if judge_llm is None:
+        judge_llm = ChatUpstage()
+
     # Set up a parser + inject instructions into the prompt template.
     parser = JsonOutputParser(pydantic_object=Score)
 
@@ -64,9 +67,11 @@ class Winner(BaseModel):
 
 
 def get_winner(
-    prompt, A_answer, B_answer, ground_truth_answer, judge_llm=ChatUpstage(), trials=3
+    prompt, A_answer, B_answer, ground_truth_answer, judge_llm=None, trials=3
 ):
-
+    if judge_llm is None:
+        judge_llm = ChatUpstage()
+    
     # Set up a parser + inject instructions into the prompt template.
     parser = JsonOutputParser(pydantic_object=Score)
 
