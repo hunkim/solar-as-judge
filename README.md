@@ -1,4 +1,5 @@
 # solar-as-judge
+<img width="1422" alt="image" src="https://github.com/hunkim/solar-as-judge/assets/901975/738be829-1d20-4b9a-baad-e3f2c8d066c5">
 
 
 ## How to use
