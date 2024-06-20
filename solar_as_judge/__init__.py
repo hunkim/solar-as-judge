@@ -120,7 +120,7 @@ Answer B: {B_answer}
     return -1
 
 
-def judge(
+def _judgeAB(
     prompt, A_answer, B_answer, ground_truth_answer=None, judge_llm=None, trials=7
 ):
     if judge_llm is None:
@@ -136,3 +136,46 @@ def judge(
 
     # Not conclusive
     return 0, 0
+
+def judge(
+    prompt, A_answer, B_answer, ground_truth_answer=None, judge_llm=None, trials=7
+):
+    '''
+    Judge the two answers A and B based on the prompt.
+    If the answers are consistent, return the scores.
+    If the answers are inconsistent, return 0, 0.
+
+    Args:
+    - prompt: str
+    - A_answer: str
+    - B_answer: str
+    - ground_truth_answer: str
+    - judge_llm: ChatUpstage
+    - trials: int
+
+    Returns:
+    - A_score: int
+    - B_score: int
+    '''
+    
+    A_score1, B_score1 = _judgeAB(
+        prompt, A_answer, B_answer, ground_truth_answer, judge_llm, trials
+    )
+
+    if A_score1 == 0 and B_score1 == 0:
+        return 0, 0
+    
+    B_score2, A_score2 = _judgeAB(
+        prompt, B_answer, A_answer, ground_truth_answer, judge_llm, trials
+    )
+
+    if A_score2 == 0 and B_score2 == 0:
+        return 0, 0
+    
+    # Check if their scores are consistent
+    if A_score1 > B_score1 and A_score2 > B_score2:
+        return A_score1+A_score2, B_score1+B_score2
+    elif B_score1 > A_score1 and B_score2 > A_score2:
+        return A_score1+A_score2, B_score1+B_score2
+    else:
+        return 0, 0
