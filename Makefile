@@ -2,6 +2,7 @@ VENV = .venv
 PYTHON = $(VENV)/bin/python3
 PIP = $(VENV)/bin/pip3
 STREAMLIT = $(VENV)/bin/streamlit
+TWINE = $(VENV)/bin/twine
 
 include .env
 export
@@ -14,6 +15,9 @@ $(VENV)/bin/activate: requirements.txt
 
 test: $(VENV)/bin/activate
 	$(PYTHON) test.py
+
+up: $(VENV)/bin/activate
+	$(TWINE) upload dist/*
 
 clean:
 	rm -rf __pycache__

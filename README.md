@@ -5,6 +5,10 @@
 ## How to use
 Set the UPSTAGE_API_KEY environment variable. Obtain your key from the Upstage console at <https://console.upstage.ai>.
 
+```bash
+pip install solar-as-judge
+```
+
 ```python
 import solar_as_judge as saj
 
