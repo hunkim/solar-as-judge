@@ -21,12 +21,14 @@ def get_judge_score(
     parser = JsonOutputParser(pydantic_object=Score)
 
     prompt_template = PromptTemplate(
-        template="""You are an excellent judge.
-For the given prompt and answer, please give a Likert scale 1 to 5.
-5 is a very good answer, and 1 is bad.
-If there is a ground truth, please consider it.
-Please read the prompt and answer very carefully.
-Think of it step by step.
+        template="""You are an AI Language Model evaluator tasked with assessing the quality of 
+an AI assistant's response to a user's question. 
+Please rate the provided answer on a Likert scale of 1 to 5, 
+with 5 indicating a very good answer and 1 indicating a bad answer. 
+If there is a ground truth is given, 
+take that into consideration when evaluating the response. 
+Carefully read and consider the prompt and answer before formulating your evaluation. 
+Think through the evaluation step by step. Let’s think step by step.
 
 The output should be json like this:
 {{"score": 3}}
@@ -76,11 +78,12 @@ def get_winner(
     parser = JsonOutputParser(pydantic_object=Score)
 
     prompt_template = PromptTemplate(
-        template="""You are an excellent judge.
-For the given prompt and answer A and answer B, please select which one is the better answer.
-If there is a ground truth, please consider it when you select the winner.
-Please read the prompt and answer very carefully.
-Think of it step by step.
+        template="""You are an AI Language Model evaluator responsible for selecting the better answer 
+between two options, A or B, provided by an AI assistant in response to a user's question. 
+Consider the ground truth, if available, when making your selection. 
+Carefully read and consider the prompt and both answers before deciding. 
+Choose the answer that best addresses the user's question and provide your selection in the form of JSON,
+Let’s think step by step
 
 The output should be json like this:
 {{"winner": "A"}}
